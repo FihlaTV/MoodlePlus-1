@@ -1,0 +1,8 @@
+<resources>
+    <string name="app_name">Moodler</string>
+    <string name="username">Enter your Username</string>
+    <string name="password">Enter your Password</string>
+    <string name="login">Login</string>
+    <string name="hello_world">Hello world!</string>
+    <string name="action_settings">Settings</string>
+</resources>
