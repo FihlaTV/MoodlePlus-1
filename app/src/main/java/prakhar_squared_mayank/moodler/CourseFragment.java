@@ -1,13 +1,27 @@
 package prakhar_squared_mayank.moodler;
 
 import android.app.Activity;
+import android.app.DownloadManager;
 import android.content.Context;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ListView;
+
+import com.android.volley.Request;
+import com.android.volley.Response;
+import com.android.volley.VolleyError;
+import com.android.volley.toolbox.JsonObjectRequest;
+
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
+
+import java.util.ArrayList;
 
 import prakhar_squared_mayank.moodler.R;
 
@@ -66,7 +80,74 @@ public class CourseFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_course, container, false);
+        View layout_view = inflater.inflate(R.layout.fragment_course, container, false);
+
+
+        final ArrayList<String> list = new ArrayList<String>();
+        String coursesUrl="http://10.0.2.2:8000/courses/list.json";
+        JsonObjectRequest jsObjRequest = new JsonObjectRequest
+                (Request.Method.GET,coursesUrl,null ,new Response.Listener<JSONObject>() {
+
+                    @Override
+                    public void onResponse(JSONObject response) {
+                        //Log.d(TAG, response.toString())
+                        try {
+                            String current_sem= response.getString("current_sem");
+                            JSONArray courses = response.getJSONArray("courses");
+                            for(int i=0;i<courses.length();i++){
+                                String code=response.getString("code");
+                                String name=response.getString("name");
+                                String descrip=response.getString("description");
+                                int credits=response.getInt("credits");
+                                int id=response.getInt("id");
+                                String ltp=response.getString("l_t_p");
+                            }
+                        } catch (JSONException e) {
+                            e.printStackTrace();
+                        }
+                    }
+                }, new Response.ErrorListener() {
+
+                    @Override
+                    public void onErrorResponse(VolleyError error) {
+                        // TODO Auto-generated method stub
+
+                    }
+                });
+
+
+        ListView lv=(ListView) layout_view.findViewById(R.id.listview);
+
+
+//        for (int i = 0; i < arr.length; ++i) {
+//            list.add(arr[i]);
+//        }
+        System.out.println("babhkdabhkdabdabkbda::"+list.get(1));
+
+        final StableArrayAdapter adapter = new StableArrayAdapter(this,android.R.layout.simple_list_item_1, list);
+        lv.setAdapter(adapter);
+//        lv.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+//
+//            @Override
+//            public void onItemClick(AdapterView parent, final View view,
+//                int position, long id) {
+//                final String item = (String) parent.getItemAtPosition(position);
+//                view.animate().setDuration(2000).alpha(0)
+//                        .withEndAction(new Runnable() {
+//                            @Override
+//                            public void run() {
+//                                list.remove(item);
+//                                adapter.notifyDataSetChanged();
+//                                view.setAlpha(1);
+//                            }
+//                        });
+//            }
+//
+//        });
+
+
+
+        return layout_view;
     }
 
     // TODO: Rename method, update argument and hook method into UI event
