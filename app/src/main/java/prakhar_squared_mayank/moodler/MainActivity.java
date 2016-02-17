@@ -20,6 +20,9 @@ import com.android.volley.toolbox.Volley;
 
 import org.json.JSONObject;
 
+import java.net.CookieHandler;
+import java.net.CookieManager;
+import java.net.CookiePolicy;
 import java.util.Map;
 
 
@@ -34,6 +37,9 @@ public class MainActivity extends ActionBarActivity implements View.OnClickListe
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+        CookieManager manager = new CookieManager( null, CookiePolicy.ACCEPT_ALL );
+        CookieHandler.setDefault(manager);
 
         //Onclick listener for login button
         loginButton=(Button) findViewById(R.id.loginB);
@@ -74,6 +80,8 @@ public class MainActivity extends ActionBarActivity implements View.OnClickListe
 //                    String success=res.getString("success");
                     System.out.println("YOU ARE HERE EUREKA!");
                     showToast("success");
+                    Intent it = new Intent(getApplicationContext(), Dashboard.class);
+                    startActivity(it);
                 }catch (Exception e){
                     e.printStackTrace();
                 }
@@ -86,7 +94,7 @@ public class MainActivity extends ActionBarActivity implements View.OnClickListe
                 showToast("failed");
             }
         });
-        RequestQueue a=Volley.newRequestQueue(getApplicationContext());
+        RequestQueue a=Volley.newRequestQueue(getApplicationContext(), 4000);
         a.add(req);
 
     }

@@ -136,7 +136,20 @@ public class Dashboard extends AppCompatActivity {
         public Fragment getItem(int position) {
             // getItem is called to instantiate the fragment for the given page.
             // Return a PlaceholderFragment (defined as a static inner class below).
-            return PlaceholderFragment.newInstance(position + 1);
+            Fragment fragment=null;
+            switch(position) {
+                case 0:
+                    fragment = CourseFragment.newInstance("a", "b");
+                    break;
+                case 1:
+                    fragment = NotificationFragment.newInstance("b", "c");
+                    break;
+                case 2:
+                    fragment = GradeFragment.newInstance("c", "d");
+                    break;
+            }
+            return fragment;
+//            return PlaceholderFragment.newInstance(position + 1);
         }
 
         @Override
@@ -149,7 +162,7 @@ public class Dashboard extends AppCompatActivity {
         public CharSequence getPageTitle(int position) {
             switch (position) {
                 case 0:
-                    return "SECTION 1";
+                    return "Notification";
                 case 1:
                     return "SECTION 2";
                 case 2:
