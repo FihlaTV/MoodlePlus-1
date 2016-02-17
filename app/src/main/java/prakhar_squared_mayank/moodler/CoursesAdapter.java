@@ -1,4 +1,4 @@
-<<<<<<< HEAD
+
 //package com.example.prakhar0409.twitterapp;
 //
 //import android.app.Activity;
@@ -50,8 +50,7 @@
 //        return convertView;//inflater.inflate(R.layout.row_tweet,parent,false);
 //    }
 //}
-=======
-package com.example.prakhar0409.twitterapp;
+package prakhar_squared_mayank.moodler;
 
 import android.app.Activity;
 import android.view.LayoutInflater;
@@ -59,8 +58,6 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.TextView;
-
-import com.example.prakhar0409.twitterapp.models.Tweet;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -106,4 +103,3 @@ public class CoursesAdapter extends ArrayAdapter<Course> {
         return convertView;//inflater.inflate(R.layout.row_tweet,parent,false);
     }
 }
->>>>>>> 31141b17da3bd6d346ced981f41ace883dd28b84

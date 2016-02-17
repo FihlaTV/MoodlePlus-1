@@ -12,12 +12,13 @@
         android:layout_marginLeft="10dp"
         android:gravity="left">
 
-<<<<<<< HEAD
         <TextView
             android:id="@+id/tweetTitle"
-=======
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
+
         <TextView android:id="@+id/courseTitle"
->>>>>>> 31141b17da3bd6d346ced981f41ace883dd28b84
+
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="Header Text"
@@ -25,12 +26,13 @@
             android:textColor="#222222"
             android:textStyle="bold" />
 
-<<<<<<< HEAD
+
         <TextView
             android:id="@+id/tweetBody"
-=======
+            android:layout_height="wrap_content"
+            android:layout_width="match_parent" />
+
         <TextView android:id="@+id/courseDescription"
->>>>>>> 31141b17da3bd6d346ced981f41ace883dd28b84
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="Tweet body here"
@@ -38,17 +40,16 @@
             android:ellipsize="end"
             android:lines="3"
             android:textSize="14sp"
-<<<<<<< HEAD
             android:textColor="#666666" />
 
         <TextView
             android:id="@+id/textView3"
-=======
-            android:textColor="#666666"/>
+            android:textColor="#666666"
+            android:layout_height="wrap_content"
+            android:layout_width="match_parent" />
 
 
         <TextView android:id="@+id/footer"
->>>>>>> 31141b17da3bd6d346ced981f41ace883dd28b84
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:textColor="#999999"
