@@ -1,14 +1,17 @@
 package prakhar_squared_mayank.moodler;
 
+import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
+import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.android.volley.Request;
@@ -28,10 +31,11 @@ import java.util.Map;
 
 public class MainActivity extends ActionBarActivity implements View.OnClickListener {
 
-    Button loginButton;
+    Button loginButton,lister;
     EditText username,password;
-    String ip="127.0.0.1";
-    String port="2000";
+    static String ip="10.0.2.2:8000";
+    private TextView resultText;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -45,6 +49,9 @@ public class MainActivity extends ActionBarActivity implements View.OnClickListe
         loginButton=(Button) findViewById(R.id.loginB);
         loginButton.setOnClickListener(this);
 
+        lister=(Button) findViewById(R.id.lister);
+        lister.setOnClickListener(this);
+
         //Uername and password edit texts
         username=(EditText) findViewById(R.id.username);
         password=(EditText) findViewById(R.id.password);
@@ -55,6 +62,10 @@ public class MainActivity extends ActionBarActivity implements View.OnClickListe
             case R.id.loginB:
                 loginProc();
                 goToDashBoard();
+                break;
+            case R.id.lister:
+                Intent it = new Intent(getApplicationContext(), ListingViewer.class);
+                startActivity(it);
                 break;
             default:
         }
@@ -69,7 +80,7 @@ public class MainActivity extends ActionBarActivity implements View.OnClickListe
         String usernameString=username.getText().toString().trim();
         String passwordString=password.getText().toString().trim();
 //    String loginUrl="http://www.google.com";
-        String loginUrl="http://10.0.2.2:2000/default/login.json?userid="+usernameString+"&password="+passwordString;
+        String loginUrl="http://"+ip+"/default/login.json?userid="+usernameString+"&password="+passwordString;
         System.out.println("URL HIT WAS:"+loginUrl);
         StringRequest req=new StringRequest(Request.Method.GET, loginUrl, new Response.Listener<String>() {
             @Override
@@ -94,7 +105,7 @@ public class MainActivity extends ActionBarActivity implements View.OnClickListe
                 showToast("failed");
             }
         });
-        RequestQueue a=Volley.newRequestQueue(getApplicationContext(), 4000);
+        RequestQueue a=Volley.newRequestQueue(getApplicationContext());//, 4000);
         a.add(req);
 
     }
@@ -110,18 +121,51 @@ public class MainActivity extends ActionBarActivity implements View.OnClickListe
         return true;
     }
 
+    public void changeIp(){
+        LayoutInflater layoutInflater = LayoutInflater.from(MainActivity.this);
+        View promptView = layoutInflater.inflate(R.layout.input_dialog, null);
+        AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(MainActivity.this);
+        alertDialogBuilder.setView(promptView);
+
+        final EditText editText = (EditText) promptView.findViewById(R.id.edittext);
+        // setup a dialog window
+        alertDialogBuilder.setCancelable(false)
+                .setPositiveButton("OK", new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog, int id) {
+                        resultText.setText("Hello, " + editText.getText());
+                    }
+                })
+                .setNegativeButton("Cancel",
+                        new DialogInterface.OnClickListener() {
+                            public void onClick(DialogInterface dialog, int id) {
+                                dialog.cancel();
+                            }
+                        });
+
+        // create an alert dialog
+        AlertDialog alert = alertDialogBuilder.create();
+        alert.show();
+
+    }
+
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         // Handle action bar item clicks here. The action bar will
         // automatically handle clicks on the Home/Up button, so long
         // as you specify a parent activity in AndroidManifest.xml.
-        int id = item.getItemId();
-
-        //noinspection SimplifiableIfStatement
-        if (id == R.id.action_settings) {
-            return true;
+        switch(item.getItemId()){
+            case R.id.action_settings:
+                break;
+            case R.id.action_change_ip:
+                changeIp();
+                break;
+            default:
+                return super.onOptionsItemSelected(item);
         }
 
+        //noinspection SimplifiableIfStatement
         return super.onOptionsItemSelected(item);
+
+
     }
 }
