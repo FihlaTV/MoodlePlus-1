@@ -84,23 +84,23 @@ public class CourseFragment extends Fragment {
 
 
         final ArrayList<String> list = new ArrayList<String>();
-        String coursesUrl="http://10.0.2.2:8000/courses/list.json";
+        String coursesUrl = "http://10.0.2.2:8000/courses/list.json";
         JsonObjectRequest jsObjRequest = new JsonObjectRequest
-                (Request.Method.GET,coursesUrl,null ,new Response.Listener<JSONObject>() {
+                (Request.Method.GET, coursesUrl, null, new Response.Listener<JSONObject>() {
 
                     @Override
                     public void onResponse(JSONObject response) {
                         //Log.d(TAG, response.toString())
                         try {
-                            String current_sem= response.getString("current_sem");
+                            String current_sem = response.getString("current_sem");
                             JSONArray courses = response.getJSONArray("courses");
-                            for(int i=0;i<courses.length();i++){
-                                String code=response.getString("code");
-                                String name=response.getString("name");
-                                String descrip=response.getString("description");
-                                int credits=response.getInt("credits");
-                                int id=response.getInt("id");
-                                String ltp=response.getString("l_t_p");
+                            for (int i = 0; i < courses.length(); i++) {
+                                String code = response.getString("code");
+                                String name = response.getString("name");
+                                String descrip = response.getString("description");
+                                int credits = response.getInt("credits");
+                                int id = response.getInt("id");
+                                String ltp = response.getString("l_t_p");
                             }
                         } catch (JSONException e) {
                             e.printStackTrace();
@@ -116,16 +116,16 @@ public class CourseFragment extends Fragment {
                 });
 
 
-        ListView lv=(ListView) layout_view.findViewById(R.id.listview);
+        ListView lv = (ListView) layout_view.findViewById(R.id.listview);
 
 
 //        for (int i = 0; i < arr.length; ++i) {
 //            list.add(arr[i]);
 //        }
-        System.out.println("babhkdabhkdabdabkbda::"+list.get(1));
+        System.out.println("babhkdabhkdabdabkbda::" + list.get(1));
 
-        final StableArrayAdapter adapter = new StableArrayAdapter(this,android.R.layout.simple_list_item_1, list);
-        lv.setAdapter(adapter);
+//        final StableArrayAdapter adapter = new StableArrayAdapter(this, android.R.layout.simple_list_item_1, list);
+//        lv.setAdapter(adapter);
 //        lv.setOnItemClickListener(new AdapterView.OnItemClickListener() {
 //
 //            @Override
@@ -144,7 +144,6 @@ public class CourseFragment extends Fragment {
 //            }
 //
 //        });
-
 
 
         return layout_view;

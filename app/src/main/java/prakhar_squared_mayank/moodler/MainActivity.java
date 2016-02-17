@@ -51,9 +51,9 @@ public class MainActivity extends ActionBarActivity implements View.OnClickListe
     }
 
     public void onClick(View view){
+        loginProc();
         switch (view.getId()){
             case R.id.loginB:
-                loginProc();
                 goToDashBoard();
                 break;
             default:
@@ -100,7 +100,7 @@ public class MainActivity extends ActionBarActivity implements View.OnClickListe
     }
 
     //Shows toast with appropriate responses
-    public void showToast(String msg){
+    public void showToast(String msg) {
         Toast.makeText(this,msg,Toast.LENGTH_SHORT).show();
     }
     @Override

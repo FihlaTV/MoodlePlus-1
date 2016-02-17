@@ -12,15 +12,17 @@
         android:layout_marginLeft="10dp"
         android:gravity="left">
 
-        <TextView android:id="@+id/tweetTitle"
+        <TextView
+            android:id="@+id/tweetTitle"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="Header Text"
             android:textSize="19sp"
             android:textColor="#222222"
-            android:textStyle="bold"/>
+            android:textStyle="bold" />
 
-        <TextView android:id="@+id/tweetBody"
+        <TextView
+            android:id="@+id/tweetBody"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="Tweet body here"
@@ -28,13 +30,15 @@
             android:ellipsize="end"
             android:lines="3"
             android:textSize="14sp"
-            android:textColor="#666666"/>
-        <TextView android:id="@+id/textView3"
+            android:textColor="#666666" />
+
+        <TextView
+            android:id="@+id/textView3"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:textColor="#999999"
             android:text="20 December 2015"
             android:layout_marginTop="5dp"
-            android:textSize="12dp"/>
+            android:textSize="12dp" />
     </LinearLayout>
 </LinearLayout>
