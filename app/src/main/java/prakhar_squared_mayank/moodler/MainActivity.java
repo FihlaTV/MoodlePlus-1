@@ -94,7 +94,7 @@ public class MainActivity extends ActionBarActivity implements View.OnClickListe
                 showToast("failed");
             }
         });
-        RequestQueue a=Volley.newRequestQueue(getApplicationContext(), 4000);
+        RequestQueue a = Volley.newRequestQueue(getApplicationContext());
         a.add(req);
 
     }
