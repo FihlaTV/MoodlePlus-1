@@ -1,6 +1,7 @@
 package prakhar_squared_mayank.moodler;
 
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
 import android.view.Menu;
@@ -47,9 +48,15 @@ public class MainActivity extends ActionBarActivity implements View.OnClickListe
         switch (view.getId()){
             case R.id.loginB:
                 loginProc();
+                goToDashBoard();
                 break;
             default:
         }
+    }
+
+    private void goToDashBoard() {
+        Intent intent = new Intent(getApplicationContext(), Dashboard.class);
+        startActivity(intent);
     }
 
     public void loginProc(){
