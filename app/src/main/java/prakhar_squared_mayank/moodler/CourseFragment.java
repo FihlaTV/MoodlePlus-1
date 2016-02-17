@@ -24,6 +24,7 @@ import org.json.JSONObject;
 import java.util.ArrayList;
 
 import prakhar_squared_mayank.moodler.R;
+import prakhar_squared_mayank.moodler.models.Course;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -38,6 +39,9 @@ public class CourseFragment extends Fragment {
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
     private static final String ARG_PARAM1 = "param1";
     private static final String ARG_PARAM2 = "param2";
+
+
+    CoursesAdapter coursesAdapter;
 
     // TODO: Rename and change types of parameters
     private String mParam1;
@@ -83,28 +87,42 @@ public class CourseFragment extends Fragment {
         View layout_view = inflater.inflate(R.layout.fragment_course, container, false);
 
 
-        final ArrayList<String> list = new ArrayList<String>();
-        String coursesUrl="http://10.0.2.2:8000/courses/list.json";
+        //final ArrayList<String> list = new ArrayList<String>();
+        String coursesUrl="http://"+MainActivity.ip+"/courses/list.json";
+        final ListView lv=(ListView) layout_view.findViewById(R.id.listview);
+        final ArrayList<Course> course_list=new ArrayList<Course>();
         JsonObjectRequest jsObjRequest = new JsonObjectRequest
                 (Request.Method.GET,coursesUrl,null ,new Response.Listener<JSONObject>() {
 
                     @Override
                     public void onResponse(JSONObject response) {
-                        //Log.d(TAG, response.toString())
                         try {
-                            String current_sem= response.getString("current_sem");
+                            //String current_sem= response.getString("current_sem");
                             JSONArray courses = response.getJSONArray("courses");
                             for(int i=0;i<courses.length();i++){
-                                String code=response.getString("code");
-                                String name=response.getString("name");
-                                String descrip=response.getString("description");
-                                int credits=response.getInt("credits");
-                                int id=response.getInt("id");
-                                String ltp=response.getString("l_t_p");
+                                JSONObject tmp=courses.getJSONObject(i);
+                                Course course=new Course();
+
+
+                                String code=tmp.getString("code"); course.setCode(code);
+                                String name=tmp.getString("name"); course.setName(name);
+                                String descrip=tmp.getString("description"); course.setDescription(descrip);
+                                int credits=tmp.getInt("credits"); course.setCredits(credits);
+                                int id=tmp.getInt("id"); course.setId(id);
+                                String ltp=tmp.getString("l_t_p"); course.setLtp(ltp);
+                                course_list.add(course);
                             }
+
+                            ArrayList<String> list=new ArrayList<>();
+
+
+                            coursesAdapter=new CoursesAdapter(getActivity(),course_list,null);
+                            lv.setAdapter(coursesAdapter);
+
                         } catch (JSONException e) {
                             e.printStackTrace();
                         }
+
                     }
                 }, new Response.ErrorListener() {
 
@@ -114,36 +132,9 @@ public class CourseFragment extends Fragment {
 
                     }
                 });
+                volley_singleton.getInstance(getActivity()).getRequestQueue().add(jsObjRequest);
 
 
-        ListView lv=(ListView) layout_view.findViewById(R.id.listview);
-
-
-//        for (int i = 0; i < arr.length; ++i) {
-//            list.add(arr[i]);
-//        }
-        System.out.println("babhkdabhkdabdabkbda::"+list.get(1));
-
-        final StableArrayAdapter adapter = new StableArrayAdapter(this,android.R.layout.simple_list_item_1, list);
-        lv.setAdapter(adapter);
-//        lv.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-//
-//            @Override
-//            public void onItemClick(AdapterView parent, final View view,
-//                int position, long id) {
-//                final String item = (String) parent.getItemAtPosition(position);
-//                view.animate().setDuration(2000).alpha(0)
-//                        .withEndAction(new Runnable() {
-//                            @Override
-//                            public void run() {
-//                                list.remove(item);
-//                                adapter.notifyDataSetChanged();
-//                                view.setAlpha(1);
-//                            }
-//                        });
-//            }
-//
-//        });
 
 
 

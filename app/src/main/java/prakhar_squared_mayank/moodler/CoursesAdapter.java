@@ -1,4 +1,4 @@
-package com.example.prakhar0409.twitterapp;
+package prakhar_squared_mayank.moodler;
 
 import android.app.Activity;
 import android.view.LayoutInflater;
@@ -7,7 +7,7 @@ import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.TextView;
 
-import com.example.prakhar0409.twitterapp.models.Tweet;
+import prakhar_squared_mayank.moodler.models.Course;
 
 import java.util.ArrayList;
 import java.util.List;

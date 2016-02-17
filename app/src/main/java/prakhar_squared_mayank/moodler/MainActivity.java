@@ -1,6 +1,7 @@
 package prakhar_squared_mayank.moodler;
 
 import android.app.AlertDialog;
+import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.support.v7.app.ActionBarActivity;
@@ -31,6 +32,7 @@ import java.util.Map;
 
 public class MainActivity extends ActionBarActivity implements View.OnClickListener {
 
+    final Context context = this;
     Button loginButton,lister;
     EditText username,password;
     static String ip="10.0.2.2:8000";
@@ -105,8 +107,9 @@ public class MainActivity extends ActionBarActivity implements View.OnClickListe
                 showToast("failed");
             }
         });
-        RequestQueue a=Volley.newRequestQueue(getApplicationContext());//, 4000);
-        a.add(req);
+        //RequestQueue a=Volley.newRequestQueue(getApplicationContext());//, 4000);
+        //a.add(req);
+        volley_singleton.getInstance(context).getRequestQueue().add(req);
 
     }
 
