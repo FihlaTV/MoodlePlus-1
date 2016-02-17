@@ -8,8 +8,10 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.TextView;
 import android.widget.Toast;
 
+import com.android.volley.NetworkResponse;
 import com.android.volley.Request;
 import com.android.volley.RequestQueue;
 import com.android.volley.Response;
@@ -28,6 +30,7 @@ public class MainActivity extends ActionBarActivity implements View.OnClickListe
     EditText username,password;
     String ip="127.0.0.1";
     String port="2000";
+    RequestQueue volley_queue;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -41,6 +44,9 @@ public class MainActivity extends ActionBarActivity implements View.OnClickListe
         //Uername and password edit texts
         username=(EditText) findViewById(R.id.username);
         password=(EditText) findViewById(R.id.password);
+
+        volley_queue = Volley.newRequestQueue(getApplicationContext());
+
     }
 
     public void onClick(View view){
@@ -56,17 +62,31 @@ public class MainActivity extends ActionBarActivity implements View.OnClickListe
         String usernameString=username.getText().toString().trim();
         String passwordString=password.getText().toString().trim();
 //    String loginUrl="http://www.google.com";
-        String loginUrl="http://10.0.2.2:2000/default/login.json?userid="+usernameString+"&password="+passwordString;
-        System.out.println("URL HIT WAS:"+loginUrl);
+        String loginUrl="http://10.42.0.1:8000/default/login.json?userid="+usernameString+"&password="+passwordString;
+        System.out.println("URL HIT WAS:" + loginUrl);
+        final TextView tv=(TextView)findViewById(R.id.temp);
+
         StringRequest req=new StringRequest(Request.Method.GET, loginUrl, new Response.Listener<String>() {
+
             @Override
             public void onResponse(String Response) {
-                try {
-//                    JSONObject res=new JSONObject(Response);
 
-//                    String success=res.getString("success");
-                    System.out.println("YOU ARE HERE EUREKA!");
-                    showToast("success");
+                tv.setText(Response);
+                try {
+                    JSONObject res=new JSONObject(Response);
+
+                    String success=res.getString("success");
+                    if(success.equals("1"))
+                    {
+                        System.out.println("YOU ARE HERE EUREKA!");
+                        showToast("success");
+
+                    }
+                    else
+                    {
+                        System.out.println("FAILED");
+                        showToast("Invalid Credentials");
+                    }
                 }catch (Exception e){
                     e.printStackTrace();
                 }
@@ -79,8 +99,7 @@ public class MainActivity extends ActionBarActivity implements View.OnClickListe
                 showToast("failed");
             }
         });
-        RequestQueue a=Volley.newRequestQueue(getApplicationContext());
-        a.add(req);
+        volley_queue.add(req);
 
     }
 
