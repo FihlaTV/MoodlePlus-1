@@ -1,6 +1,8 @@
 package prakhar_squared_mayank.moodler;
 
+import android.app.AlertDialog;
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
 import android.view.Menu;
@@ -8,6 +10,7 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.LinearLayout;
 import android.widget.Toast;
 
 import com.android.volley.Request;
@@ -28,6 +31,8 @@ public class MainActivity extends ActionBarActivity implements View.OnClickListe
     EditText username,password;
     String ip="127.0.0.1";
     String port="2000";
+    String loginUrl="";
+    String urlhit="http://10.0.2.2:2000";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -52,11 +57,12 @@ public class MainActivity extends ActionBarActivity implements View.OnClickListe
         }
     }
 
+
     public void loginProc(){
         String usernameString=username.getText().toString().trim();
         String passwordString=password.getText().toString().trim();
 //    String loginUrl="http://www.google.com";
-        String loginUrl="http://10.0.2.2:2000/default/login.json?userid="+usernameString+"&password="+passwordString;
+        loginUrl=urlhit+"/default/login.json?userid="+usernameString+"&password="+passwordString;
         System.out.println("URL HIT WAS:"+loginUrl);
         StringRequest req=new StringRequest(Request.Method.GET, loginUrl, new Response.Listener<String>() {
             @Override
@@ -86,7 +92,7 @@ public class MainActivity extends ActionBarActivity implements View.OnClickListe
 
     //Shows toast with appropriate responses
     public void showToast(String msg){
-        Toast.makeText(this,msg,Toast.LENGTH_SHORT).show();
+        Toast.makeText(this, msg, Toast.LENGTH_SHORT).show();
     }
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
@@ -100,13 +106,48 @@ public class MainActivity extends ActionBarActivity implements View.OnClickListe
         // Handle action bar item clicks here. The action bar will
         // automatically handle clicks on the Home/Up button, so long
         // as you specify a parent activity in AndroidManifest.xml.
-        int id = item.getItemId();
+
+        switch(item.getItemId()){
+            case R.id.action_change_ip:
+                AlertDialog.Builder alertDialog=new AlertDialog.Builder(MainActivity.this);
+                alertDialog.setMessage("Enter IP");
+                final EditText input = new EditText(MainActivity.this);
+                LinearLayout.LayoutParams lp = new LinearLayout.LayoutParams(
+                        LinearLayout.LayoutParams.MATCH_PARENT,
+                        LinearLayout.LayoutParams.MATCH_PARENT);
+                input.setLayoutParams(lp);
+                alertDialog.setView(input);
+
+                alertDialog.setPositiveButton("OK",
+                        new DialogInterface.OnClickListener() {
+                            public void onClick(DialogInterface dialog, int which) {
+                                urlhit=input.getText().toString().trim();
+                                showToast("IP CHANGED");
+                            }
+                        });
+
+                alertDialog.setNegativeButton("NO",
+                        new DialogInterface.OnClickListener() {
+                            public void onClick(DialogInterface dialog, int which) {
+                                dialog.cancel();
+                            }
+                        });
+                showToast("kuch toh hua hai!");
+                alertDialog.show();
+
+                break;
+            case R.id.action_settings:
+                break;
+            default:
+                return super.onOptionsItemSelected(item);
+
+        }
+        return super.onOptionsItemSelected(item);
+
 
         //noinspection SimplifiableIfStatement
-        if (id == R.id.action_settings) {
-            return true;
-        }
 
-        return super.onOptionsItemSelected(item);
+
+
     }
 }
