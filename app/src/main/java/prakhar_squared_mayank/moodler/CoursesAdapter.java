@@ -13,21 +13,22 @@ import java.util.ArrayList;
 import java.util.List;
 
 import prakhar_squared_mayank.moodler.R;
+import prakhar_squared_mayank.moodler.models.Course;
 
 /**
  * Created by Prakhar on 12/20/2015.
  */
 
-public class CoursesAdapter extends ArrayAdapter<Tweet> {
+public class CoursesAdapter extends ArrayAdapter<Course> {
 
     private LayoutInflater inflater;
-    private List<Tweet> tweetshere=new ArrayList<Tweet>();
+    private List<Course> courseshere=new ArrayList<Course>();
     //String[] item=new String[10];
 
-    public CoursesAdapter(Activity activity, List<Tweet> items, String[] item){
-        super(activity, R.layout.row_tweet,items);
+    public CoursesAdapter(Activity activity, List<Course> items, String[] item){
+        super(activity, R.layout.row_courses_fragment,items);
         inflater=activity.getWindow().getLayoutInflater();
-        tweetshere=items;
+        courseshere=items;
 //        for(int i=0;i<items.size();i++){
 //            tweetshere.add(items.get(i));
 //        }
@@ -37,14 +38,17 @@ public class CoursesAdapter extends ArrayAdapter<Tweet> {
     @Override
     public View getView(int position,View convertView,ViewGroup parent){
         if(convertView==null){
-            convertView=inflater.inflate(R.layout.row_tweet,parent,false);
+            convertView=inflater.inflate(R.layout.row_courses_fragment,parent,false);
         }
 
-        TextView tweetTitle=(TextView) convertView.findViewById(R.id.tweetTitle);
-        TextView tweetBody=(TextView) convertView.findViewById(R.id.tweetBody);
+        TextView title=(TextView) convertView.findViewById(R.id.courseTitle);
+        TextView Description=(TextView) convertView.findViewById(R.id.courseDescription);
+        TextView footer=(TextView) convertView.findViewById(R.id.footer);
+        Course tmp=courseshere.get(position);
+        title.setText(tmp.getCode()+"::"+tmp.getName());
+        Description.setText("Description::"+tmp.getDescription());
+        footer.setText("id:"+tmp.getId()+"  credits:"+tmp.getCredits()+"  l_t_p:"+tmp.getLtp());
 
-        tweetTitle.setText(tweetshere.get(position).getTitle());
-        tweetBody.setText(tweetshere.get(position).getBody());
 
         return convertView;//inflater.inflate(R.layout.row_tweet,parent,false);
     }
