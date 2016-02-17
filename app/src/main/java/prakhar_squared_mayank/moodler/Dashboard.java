@@ -2,6 +2,7 @@ package prakhar_squared_mayank.moodler;
 
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
+import android.support.design.widget.TabLayout;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 
@@ -17,6 +18,9 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import android.widget.TextView;
+
+import java.util.ArrayList;
+import java.util.List;
 
 import prakhar_squared_mayank.moodler.R;
 
@@ -35,6 +39,8 @@ public class Dashboard extends AppCompatActivity {
     /**
      * The {@link ViewPager} that will host the section contents.
      */
+    private Toolbar toolbar;
+    private TabLayout tabLayout;
     private ViewPager mViewPager;
 
     @Override
@@ -48,22 +54,18 @@ public class Dashboard extends AppCompatActivity {
         // primary sections of the activity.
         mSectionsPagerAdapter = new SectionsPagerAdapter(getSupportFragmentManager());
 
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+
         // Set up the ViewPager with the sections adapter.
         mViewPager = (ViewPager) findViewById(R.id.container);
         mViewPager.setAdapter(mSectionsPagerAdapter);
 
+        setUpViewPager(mViewPager);
 
-        FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
-        fab.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
-                        .setAction("Action", null).show();
-            }
-        });
+        tabLayout = (TabLayout) findViewById(R.id.tabs);
+        tabLayout.setupWithViewPager(mViewPager);
 
     }
-
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
@@ -85,6 +87,15 @@ public class Dashboard extends AppCompatActivity {
         }
 
         return super.onOptionsItemSelected(item);
+    }
+
+    public void setUpViewPager(ViewPager upViewPager) {
+
+        SectionsPagerAdapter adapter = new SectionsPagerAdapter(getSupportFragmentManager());
+        adapter.addFragment(new NotificationFragment(), "Notices");
+        adapter.addFragment(new CourseFragment(), "Courses");
+        adapter.addFragment(new GradeFragment(), "Grades");
+        mViewPager.setAdapter(adapter);
     }
 
     /**
@@ -128,47 +139,32 @@ public class Dashboard extends AppCompatActivity {
      */
     public class SectionsPagerAdapter extends FragmentPagerAdapter {
 
+        private final List<Fragment> mFragmentList = new ArrayList<>();
+        private final List<String> mFragmentTitleList = new ArrayList<>();
+
         public SectionsPagerAdapter(FragmentManager fm) {
             super(fm);
         }
 
         @Override
         public Fragment getItem(int position) {
-            // getItem is called to instantiate the fragment for the given page.
-            // Return a PlaceholderFragment (defined as a static inner class below).
-            Fragment fragment=null;
-            switch(position) {
-                case 0:
-                    fragment = CourseFragment.newInstance("a", "b");
-                    break;
-                case 1:
-                    fragment = NotificationFragment.newInstance("b", "c");
-                    break;
-                case 2:
-                    fragment = GradeFragment.newInstance("c", "d");
-                    break;
-            }
-            return fragment;
-//            return PlaceholderFragment.newInstance(position + 1);
+
+            return mFragmentList.get(position);
         }
 
         @Override
         public int getCount() {
-            // Show 3 total pages.
-            return 3;
+            return mFragmentList.size();
+        }
+
+        public void addFragment(Fragment fragment, String title) {
+            mFragmentList.add(fragment);
+            mFragmentTitleList.add(title);
         }
 
         @Override
         public CharSequence getPageTitle(int position) {
-            switch (position) {
-                case 0:
-                    return "Notification";
-                case 1:
-                    return "SECTION 2";
-                case 2:
-                    return "SECTION 3";
-            }
-            return null;
+            return mFragmentTitleList.get(position);
         }
     }
 }

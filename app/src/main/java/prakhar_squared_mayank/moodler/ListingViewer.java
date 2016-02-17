@@ -16,7 +16,7 @@ import java.util.List;
 
 public class ListingViewer extends ActionBarActivity {
 
-    String[] arr=new String[]{"abc","xyz","tp","die"};
+    String[] arr = new String[]{"abc", "xyz", "tp", "die"};
     private ArrayAdapter listadap;
 
     @Override
@@ -24,16 +24,16 @@ public class ListingViewer extends ActionBarActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_listing_viewer);
 
-        ListView lv=(ListView) findViewById(R.id.listview);
+        ListView lv = (ListView) findViewById(R.id.listview);
 
 
         final ArrayList<String> list = new ArrayList<String>();
         for (int i = 0; i < arr.length; ++i) {
             list.add(arr[i]);
         }
-        System.out.println("babhkdabhkdabdabkbda::"+list.get(1));
+        System.out.println("babhkdabhkdabdabkbda::" + list.get(1));
 
-        final StableArrayAdapter adapter = new StableArrayAdapter(this,android.R.layout.simple_list_item_1, list);
+        final StableArrayAdapter adapter = new StableArrayAdapter(this, android.R.layout.simple_list_item_1, list);
         lv.setAdapter(adapter);
 //        lv.setOnItemClickListener(new AdapterView.OnItemClickListener() {
 //
@@ -79,7 +79,6 @@ public class ListingViewer extends ActionBarActivity {
         return super.onOptionsItemSelected(item);
     }
 }
-
 
 
 class StableArrayAdapter extends ArrayAdapter<String> {

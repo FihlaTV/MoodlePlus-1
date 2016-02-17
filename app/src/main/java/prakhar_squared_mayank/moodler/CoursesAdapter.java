@@ -8,7 +8,6 @@ import android.widget.ArrayAdapter;
 import android.widget.TextView;
 
 import prakhar_squared_mayank.moodler.models.Course;
-
 import java.util.ArrayList;
 import java.util.List;
 
