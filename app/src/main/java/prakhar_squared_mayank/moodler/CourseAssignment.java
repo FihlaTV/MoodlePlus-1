@@ -13,12 +13,12 @@ import prakhar_squared_mayank.moodler.R;
 /**
  * A simple {@link Fragment} subclass.
  * Activities that contain this fragment must implement the
- * {@link GradeFragment.OnFragmentInteractionListener} interface
+ * {@link CourseAssignment.OnFragmentInteractionListener} interface
  * to handle interaction events.
- * Use the {@link GradeFragment#newInstance} factory method to
+ * Use the {@link CourseAssignment#newInstance} factory method to
  * create an instance of this fragment.
  */
-public class GradeFragment extends Fragment {
+public class CourseAssignment extends Fragment {
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
     private static final String ARG_PARAM1 = "param1";
@@ -30,26 +30,27 @@ public class GradeFragment extends Fragment {
 
     private OnFragmentInteractionListener mListener;
 
-    public GradeFragment() {
-        // Required empty public constructor
-    }
-
     /**
      * Use this factory method to create a new instance of
      * this fragment using the provided parameters.
      *
      * @param param1 Parameter 1.
      * @param param2 Parameter 2.
-     * @return A new instance of fragment GradeFragment.
+     * @return A new instance of fragment CourseAssignment.
      */
     // TODO: Rename and change types and number of parameters
-    public static GradeFragment newInstance(String param1, String param2) {
-        GradeFragment fragment = new GradeFragment();
+    public static CourseAssignment newInstance(String param1, String param2) {
+        CourseAssignment fragment = new CourseAssignment();
         Bundle args = new Bundle();
         args.putString(ARG_PARAM1, param1);
         args.putString(ARG_PARAM2, param2);
         fragment.setArguments(args);
         return fragment;
+    }
+
+    public CourseAssignment() {
+        // Required empty public constructor
+//        super();
     }
 
     @Override
@@ -65,7 +66,7 @@ public class GradeFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_grade, container, false);
+        return inflater.inflate(R.layout.fragment_course_assignment, container, false);
     }
 
     // TODO: Rename method, update argument and hook method into UI event
@@ -76,12 +77,12 @@ public class GradeFragment extends Fragment {
     }
 
     @Override
-    public void onAttach(Activity context) {
-        super.onAttach(context);
-//        if (context instanceof OnFragmentInteractionListener) {
-//            mListener = (OnFragmentInteractionListener) context;
-//        } else {
-//            throw new RuntimeException(context.toString()
+    public void onAttach(Activity activity) {
+        super.onAttach(activity);
+//        try {
+//            mListener = (OnFragmentInteractionListener) activity;
+//        } catch (ClassCastException e) {
+//            throw new ClassCastException(activity.toString()
 //                    + " must implement OnFragmentInteractionListener");
 //        }
     }
@@ -106,4 +107,5 @@ public class GradeFragment extends Fragment {
         // TODO: Update argument type and name
         void onFragmentInteraction(Uri uri);
     }
+
 }

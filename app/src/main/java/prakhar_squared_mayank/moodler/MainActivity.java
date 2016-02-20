@@ -33,7 +33,7 @@ public class MainActivity extends ActionBarActivity implements View.OnClickListe
     final Context context = this;
     Button loginButton;
     EditText username,password;
-    String ip="127.0.0.1";
+    static String ip="127.0.0.1";
     String port="2000";
 
     @Override
@@ -54,10 +54,10 @@ public class MainActivity extends ActionBarActivity implements View.OnClickListe
     }
 
     public void onClick(View view){
-        loginProc();
+//        loginProc();
         switch (view.getId()){
             case R.id.loginB:
-                goToDashBoard();
+                goToCoursePage();
                 break;
             default:
         }
@@ -65,6 +65,10 @@ public class MainActivity extends ActionBarActivity implements View.OnClickListe
 
     private void goToDashBoard() {
         Intent intent = new Intent(getApplicationContext(), Dashboard.class);
+        startActivity(intent);
+    }
+    private void goToCoursePage() {
+        Intent intent = new Intent(getApplicationContext(), CoursePage.class);
         startActivity(intent);
     }
 
