@@ -138,9 +138,6 @@ public class CourseFragment extends Fragment {
                 volley_singleton.getInstance(getActivity()).getRequestQueue().add(jsObjRequest);
 
 
-      // lv = (ListView) layout_view.findViewById(R.id.listview);
-
-
 
         return layout_view;
     }

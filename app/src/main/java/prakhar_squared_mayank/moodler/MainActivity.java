@@ -56,10 +56,10 @@ public class MainActivity extends ActionBarActivity implements View.OnClickListe
     }
 
     public void onClick(View view){
-        loginProc();
+//        loginProc();
         switch (view.getId()){
             case R.id.loginB:
-                goToDashBoard();
+                goToCoursePage();
                 break;
             default:
         }
@@ -67,6 +67,10 @@ public class MainActivity extends ActionBarActivity implements View.OnClickListe
 
     private void goToDashBoard() {
         Intent intent = new Intent(getApplicationContext(), Dashboard.class);
+        startActivity(intent);
+    }
+    private void goToCoursePage() {
+        Intent intent = new Intent(getApplicationContext(), CoursePage.class);
         startActivity(intent);
     }
 
