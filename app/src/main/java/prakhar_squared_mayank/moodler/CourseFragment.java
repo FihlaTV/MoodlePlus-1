@@ -89,6 +89,7 @@ public class CourseFragment extends Fragment {
 
         //final ArrayList<String> list = new ArrayList<String>();
         String coursesUrl="http://"+MainActivity.ip+"/courses/list.json";
+        System.out.println("Course fragment hits the url:"+coursesUrl);
         final ListView lv=(ListView) layout_view.findViewById(R.id.listview);
         final ArrayList<Course> course_list=new ArrayList<Course>();
 
@@ -98,8 +99,8 @@ public class CourseFragment extends Fragment {
                     @Override
                     public void onResponse(JSONObject response) {
                         try {
-
-                            //String current_sem= response.getString("current_sem");
+                            System.out.println(response);
+                            String current_sem= response.getString("current_sem");
                             JSONArray courses = response.getJSONArray("courses");
                             for(int i=0;i<courses.length();i++){
                                 JSONObject tmp=courses.getJSONObject(i);
@@ -137,7 +138,7 @@ public class CourseFragment extends Fragment {
                 volley_singleton.getInstance(getActivity()).getRequestQueue().add(jsObjRequest);
 
 
-       ListView lv = (ListView) layout_view.findViewById(R.id.listview);
+      // lv = (ListView) layout_view.findViewById(R.id.listview);
 
 
 
