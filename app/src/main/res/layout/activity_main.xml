@@ -36,7 +36,7 @@
             android:layout_marginTop="10dp"/>
 
         <EditText android:id="@+id/username"
-            android:layout_width="wrap_content"
+            android:layout_width="150dp"
             android:layout_height="wrap_content"
             android:hint="@string/username"
             android:text="cs5110300"
@@ -60,7 +60,7 @@
             android:layout_marginTop="10dp"/>
         android:layout_marginTop="10dp"/>
         <EditText android:id="@+id/password"
-            android:layout_width="wrap_content"
+            android:layout_width="150dp"
             android:layout_height="wrap_content"
             android:hint="@string/password"
             android:textColor="@color/white"
@@ -85,15 +85,14 @@
 
     <Button
         android:layout_gravity="center_horizontal"
-        android:id="@+id/lister"
+        android:id="@+id/register_main"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:bottomRightRadius="10dp"
         android:bottomLeftRadius="10dp"
         android:topLeftRadius="10dp"
         android:topRightRadius="10dp"
-        android:text="list"
-        android:clickable="true" />
+        android:text="Register" />
 
 </LinearLayout>
 </ScrollView>
