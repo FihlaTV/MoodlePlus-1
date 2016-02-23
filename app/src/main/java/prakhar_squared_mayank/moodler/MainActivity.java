@@ -35,7 +35,7 @@ public class MainActivity extends ActionBarActivity implements View.OnClickListe
     final Context context = this;
     Button loginButton;
     EditText username,password;
-    static String ip="10.0.2.2:8000";
+    static String ip="192.168.43.48:8000";
     private TextView resultText;
 
     @Override
@@ -59,7 +59,7 @@ public class MainActivity extends ActionBarActivity implements View.OnClickListe
 //        loginProc();
         switch (view.getId()){
             case R.id.loginB:
-                goToCoursePage();
+                loginProc();
                 break;
             default:
         }
@@ -84,13 +84,18 @@ public class MainActivity extends ActionBarActivity implements View.OnClickListe
             @Override
             public void onResponse(String Response) {
                 try {
-//                    JSONObject res=new JSONObject(Response);
+                    JSONObject res=new JSONObject(Response);
 
-//                    String success=res.getString("success");
-                    System.out.println("YOU ARE HERE EUREKA!");
-                    showToast("success");
-                    Intent it = new Intent(getApplicationContext(), Dashboard.class);
-                    startActivity(it);
+                    String success=res.getString("success");
+                    if(success.equals("false"))
+                    {
+                        Toast.makeText(getApplicationContext(), "Login Failed", Toast.LENGTH_SHORT).show();
+                    }
+                    else {
+                        Toast.makeText(getApplicationContext(), "Login Successful", Toast.LENGTH_SHORT).show();
+                        Intent it = new Intent(getApplicationContext(), Dashboard.class);
+                        startActivity(it);
+                    }
                 }catch (Exception e){
                     e.printStackTrace();
                 }
