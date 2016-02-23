@@ -91,7 +91,8 @@ public class CoursePage extends AppCompatActivity {
         int id = item.getItemId();
 
         //noinspection SimplifiableIfStatement
-        if (id == R.id.action_settings) {
+        if (id == R.id.logout_dashboard) {
+            Utility.logoutUser(this);
             return true;
         }
 
