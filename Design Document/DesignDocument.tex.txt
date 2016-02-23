@@ -1,0 +1,209 @@
+%%%%%%%%%%%https://www.overleaf.com/4423236wzpvfn
+
+\documentclass[12pt]{article}
+\usepackage{graphicx}
+\usepackage{hyperref}
+
+
+
+
+\begin{document}
+\begin{titlepage}
+\title{COP290}
+\centering
+{\scshape\Large COP290\par}
+\vspace{1cm}
+{\scshape\Huge Moodle Plus Android App\par}
+
+\vspace{3cm}
+	{\Large\itshape Mayank Rajoria (2014CS10233)\par}
+\vspace{0.3cm}
+	{\Large\itshape Prakhar Gupta (2014CS10290)\par}
+\vspace{0.3cm}
+	{\Large\itshape Prakhar Agrawal (2014CS10207)\par}
+
+\vfill
+\raggedleft
+Course  Coordinator\\
+Vinay Joseph Ribeiro
+% \vfill
+\end{titlepage}
+
+\begin{abstract}
+This assignment pertains to the development of the front of the moodle app, a learning management system, with the help of a locally deployed server created using a set of provided APIs to interact with it using GET requests. The app contains functionalities of logging in, logging out, view courses, assignments, grades, notifications and view and create threads and add comments to it. The application has been made in order to follow the design practices by Google and made as user friendly as possible.
+% \vfill
+\end{abstract}
+
+
+% Mention the detailed description of what the application does.
+
+\section{Introduction}
+This android app has been made using the open source Android SDK provided by Google Inc. The application first provides user with a login page which asks the user for login credentials to access the account.
+\par
+
+The app presents a compact easy to use interface for the user by means of tabviews wherever possible thus making the design minimalistic and saving the user from the hassle of clicking a series of links. Presence of Floating Action Buttons for creating new Threads and adding commnts to threads again provides the user quick to reach ways to post TODOTODO     data. 
+\par
+
+\section{User Interface}
+\par
+The application interface is divided into five screens. The home screen that provides the login utility while others help the user to interact with the database. The Action Bar Menu of the activities (other than the login activity) has option to logout which also bring him back to the login page.
+\subsection{Registration Screen}
+
+\begin{figure}[!ht]
+	\centering
+% 	\includegraphics[width=0.5\textwidth]{./UserInterface}
+	\caption{Login Screen}
+\end{figure}
+
+
+
+\begin{itemize}
+\setlength\itemsep{-0.4em}
+\item This screen presents the two text boxes to the user to enter his login id and password.
+\item The screen is also illustrated with images representing to above parameters.
+\item Finally there is the "Log In" button to enter the app. TODOTODO
+\end{itemize}
+
+\begin{itemize}
+\setlength\itemsep{-0.4em}
+\item The team name can be anything apart from an empty string.	TODOTODO PARA
+\item The name of a student can contain only English alphabet characters and space characters.
+\item The entry number is checked for its correct format using the language of Regular Expression.
+\item All inputs are first trimmed of trailing white spaces before performing the above checks.
+\end{itemize}
+
+\subsection{Dashboard Screen}
+
+\begin{figure}[!ht]
+	\centering
+% 	\includegraphics[width=0.5\textwidth]{./UserInterface}
+	\caption{Dashboard Screen}
+\end{figure}
+
+\begin{itemize}
+\setlength\itemsep{-0.4em}
+\item The screen presents a tabview.
+\item The user can see the list of all notifications, all courses and  all grades in various tabs.
+\item Individual items can be accessed by touching them. TODOTODO
+\end{itemize}
+
+\begin{itemize}
+\setlength\itemsep{-0.4em}
+\item Upon clicking the share button an Intent is created which contains a message and a link to be shared. TODOTODO
+\item This intent is passed on to the system to create a chooser of various apps to allow the user to choose where to share the message.
+\end{itemize}
+
+
+\subsection{Course Screen}
+
+\begin{figure}[!ht]
+	\centering
+% 	\includegraphics[width=0.5\textwidth]{./UserInterface}
+	\caption{Course Screen}
+\end{figure}
+
+\begin{itemize}
+\setlength\itemsep{-0.4em}
+\item This screen again presents a tabview.
+\item The tabs available are Course Threads, Course Assignments and Course Grades
+\item Similar to the previous screen here also individual options can be touched to access further details.
+\item The tab with Course Threads also has a Floating Action Button to add more threads. TODOTODO
+\item Clicking this button creates a Dialog Box asking for the title and the detailed description of thread.
+\end{itemize}
+
+\subsection{Assignment Screen}
+
+\begin{figure}[!ht]
+	\centering
+% 	\includegraphics[width=0.5\textwidth]{./UserInterface}
+	\caption{Assignment Screen}
+\end{figure}
+
+\begin{itemize}
+\setlength\itemsep{-0.4em}
+\item This screen provides the details of a particular assignment.
+\item The UI is pretty much stationary.
+\item It contains the Name of the assignment with Details about it and the Created Date and Deadline.
+\end{itemize}
+
+\subsection{Thread Screen}
+
+\begin{figure}[!ht]
+	\centering
+% 	\includegraphics[width=0.5\textwidth]{./UserInterface}
+	\caption{Thread Screen}
+\end{figure}
+
+\begin{itemize}
+\setlength\itemsep{-0.4em}
+\item This screen contains a list of all coments of a particular thread.
+\item There is a Floating Action Button to add a new comment to this thread.
+\item Clicking this button pops up a Dialog Box asking for the Comment.
+\end{itemize}
+
+
+
+
+\section{Implementation Details}
+
+\begin{itemize}
+\subsection{Managing Request}
+\item The application is based on exchange of data with a local database using locally deployed server 
+\item The server provided is a "Web2Py" server.
+\item The requests to the server have been managed using a "Volley" which is a networking library for android applications and has a huge upcoming community support.
+\item Volley was included to the project and requests to server were managed via a Volley Request Queue of a singleton class for the entire app.
+\item The response String, which is in JSON format, is then parsed to obtain various returned parameters depending on the request.
+\end{itemize}
+
+
+\subsection{Validation TODOTODO}
+\begin{itemize}
+\item Validating data before posting it to the server is an important part of the application as it does not allow fake/invalid users to register for the course via the application interface.
+\item This is implemented via the checkData() function in the same module. It checks for names being only sets of strings separated by white spaces.
+\item checkEntryNumber() is another function that handles the validation for the Entry number boxes of the application.
+\item We check for entry number via the pattern matching in form of Regular expressions.
+\item \textbf{Error Cases Handled:}
+\begin{itemize}
+		\item In TeamName: All Strings except the empty string are accepted. Handled in the method checkData().
+		\item In Names: Characters other than [A-Za-z" "] in the entry number are not allowed in the names. Handled in the method checkData().
+        \item In EntryNumbers: Check for all errors of incorrect number of characters or incorrect position of letters or invalid entry year. Handled in the method checkEntryNumber(). All probable error cases are extensively handled using simple regular expression.
+	\end{itemize}
+\end{itemize}
+    
+    
+   
+    
+\subsection{Autocomplete \& IntelliSense TODOTODO}
+\begin{itemize}
+\item On writing first few characters of name, the application starts suggesting people it thinks you may be naming. Since we had access to only data of the department people, suggestions are based on this data only.
+\item Similar suggestions appear on typing entry numbers using the same AutocompleteTextView.
+\item On completing the name field the application tends to complete the entry number field correctly by automatically determining the person's identity based on the name. This is the IntelliSense feature which is unique to our application.
+\item This feature is based on our access to the department data from the CSE website. We store entries of student names vs entry numbers which we later use to predict entry numbers based on names.
+\end{itemize}
+
+\subsection{Miscellaneous TODO}
+\begin{itemize}
+\item Keyboard hiding feature has been added, which hides the keyboard whenever the user clicks outside any of the EditText text box.
+\end{itemize}
+
+\section{Project repository and guildlines for Contribution}
+\par The code for the project is being maintained in this repository: \url{ https://github.com/Prakhar0409/MoodlePlus.git}.
+Read the contribution guidlines given on the github project page to contribute. Don't forget to document changes. 
+\\
+\textbf{Voila! you have made it till the end.}
+
+\section{Citations}
+\begin{itemize}
+\item \url{ developer.android.com/training/index.html}
+\item \url{www.javatpoint.com/android-tutorial}
+\item \url{developer.android.com/training/volley/index.html}
+\sloppy
+\item \url{http://stackoverflow.com/questions/33573803/how-to-send-a-post-request-using-volley-with-string-body}
+\end{itemize}
+
+
+
+\bibliographystyle{abbrv}
+\bibliography{references}
+
+\end{document}
