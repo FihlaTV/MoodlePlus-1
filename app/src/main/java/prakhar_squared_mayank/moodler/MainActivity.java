@@ -50,7 +50,7 @@ public class MainActivity extends ActionBarActivity implements View.OnClickListe
         loginButton=(Button) findViewById(R.id.loginB);
         loginButton.setOnClickListener(this);
 
-        //Uername and password edit texts
+        //Username and password edit texts
         username=(EditText) findViewById(R.id.username);
         password=(EditText) findViewById(R.id.password);
     }
@@ -128,7 +128,7 @@ public class MainActivity extends ActionBarActivity implements View.OnClickListe
         alertDialogBuilder.setCancelable(false)
                 .setPositiveButton("OK", new DialogInterface.OnClickListener() {
                     public void onClick(DialogInterface dialog, int id) {
-                        resultText.setText("Hello, " + editText.getText());
+                        //resultText.setText("Hello, " + editText.getText());
                     }
                 })
                 .setNegativeButton("Cancel",
