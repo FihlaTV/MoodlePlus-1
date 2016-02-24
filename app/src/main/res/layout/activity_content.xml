@@ -5,7 +5,8 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:fitsSystemWindows="true"
-    tools:context="prakhar_squared_mayank.moodler.Content">
+    tools:context="prakhar_squared_mayank.moodler.Content"
+    android:background="#4379d6">
 
     <android.support.design.widget.AppBarLayout
         android:layout_width="match_parent"

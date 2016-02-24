@@ -2,11 +2,12 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="prakhar_squared_mayank.moodler.CourseFragment">
+    tools:context="prakhar_squared_mayank.moodler.CourseFragment"
+    android:background="#4379d6">
 
     <!-- TODO: Update blank fragment layout -->
     <ListView xmlns:android="http://schemas.android.com/apk/res/android"
-        android:id="@+id/listview"
+        android:id="@+id/listview1"
         android:layout_width="fill_parent"
         android:layout_height="fill_parent" />
 

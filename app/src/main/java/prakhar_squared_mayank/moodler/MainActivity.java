@@ -87,7 +87,7 @@ public class MainActivity extends ActionBarActivity implements View.OnClickListe
     public void loginProc(){
         String usernameString=username.getText().toString().trim();
         String passwordString=password.getText().toString().trim();
-//    String loginUrl="http://www.google.com";
+
         String loginUrl="http://"+ip+"/default/login.json?userid="+usernameString+"&password="+passwordString;
         System.out.println("URL HIT WAS:"+loginUrl);
         StringRequest req=new StringRequest(Request.Method.GET, loginUrl, new Response.Listener<String>() {
@@ -138,6 +138,7 @@ public class MainActivity extends ActionBarActivity implements View.OnClickListe
     }
 
     public void changeIp(){
+
         LayoutInflater layoutInflater = LayoutInflater.from(MainActivity.this);
         View promptView = layoutInflater.inflate(R.layout.input_dialog, null);
         AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(MainActivity.this);
@@ -148,7 +149,8 @@ public class MainActivity extends ActionBarActivity implements View.OnClickListe
         alertDialogBuilder.setCancelable(false)
                 .setPositiveButton("OK", new DialogInterface.OnClickListener() {
                     public void onClick(DialogInterface dialog, int id) {
-                        //resultText.setText("Hello, " + editText.getText());
+
+                        ip=(String) editText.getText().toString().trim();
                     }
                 })
                 .setNegativeButton("Cancel",
@@ -161,7 +163,6 @@ public class MainActivity extends ActionBarActivity implements View.OnClickListe
         // create an alert dialog
         AlertDialog alert = alertDialogBuilder.create();
         alert.show();
-
     }
 
     @Override

@@ -34,8 +34,15 @@
         <activity
             android:name=".CoursePage"
             android:label="@string/title_activity_course_page"
+
+            android:theme="@style/AppTheme.NoActionBar" >
+        </activity>
+        <activity
+            android:name="AssignmentDetails"
+            android:label="@string/title_activity_assignment_details" >
             android:theme="@style/AppTheme.NoActionBar"></activity>
         <activity android:name=".RegisterActivity"></activity>
+
     </application>
 
 </manifest>

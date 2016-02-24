@@ -1,16 +1,14 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:orientation="vertical" android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:background="#4379d6">
+    android:layout_height="match_parent">
 
     <TextView android:id="@+id/AssignTitle"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
         android:text="Assignment Title"
         android:textSize="20dp"
-        android:textStyle="bold"
-        android:textColor="@color/white"/>
+        android:textStyle="bold"/>
 
 
 
@@ -18,22 +16,19 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Start Date"
-        android:textSize="17dp"
-        android:textColor="@color/white"/>
+        android:textSize="18dp"/>
 
     <TextView android:id="@+id/EndDate"
 
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="End Date"
-        android:textSize="17dp"
-        android:textColor="@color/white"/>
+        android:textSize="18dp"/>
 
 
     <TextView android:id="@+id/CourseAssignmentDescription"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
         android:text="This is assignment description"
-        android:textSize="15dp"
-        android:textColor="@color/white"/>
+        android:textSize="15dp"/>
 </LinearLayout>
