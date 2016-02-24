@@ -27,5 +27,6 @@
         <item>Student</item>
         <item>Professor</item>
     </string-array>
+    <string name="title_activity_thread_details">ThreadDetails</string>
 
 </resources>

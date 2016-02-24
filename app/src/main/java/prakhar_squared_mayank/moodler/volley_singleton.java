@@ -35,7 +35,7 @@ public class volley_singleton{//} extends Application {
 
     public RequestQueue getRequestQueue(){
         if (_RequestQueue== null) {
-            _RequestQueue = Volley.newRequestQueue(_context, 10 * 1024 * 1024); // this is for caching request
+            _RequestQueue = Volley.newRequestQueue(_context);//, 10 * 1024 * 1024); // this is for caching request
         }
 
         return _RequestQueue;

@@ -36,7 +36,7 @@ public class MainActivity extends ActionBarActivity implements View.OnClickListe
     final Context context = this;
     Button loginButton, registerButton;
     EditText username,password;
-    static String ip="192.168.43.48:8000";
+    static String ip="10.0.2.2:8000";
     private TextView resultText;
 
     @Override

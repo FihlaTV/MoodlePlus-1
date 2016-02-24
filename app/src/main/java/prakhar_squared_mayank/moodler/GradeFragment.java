@@ -1,31 +1,25 @@
 package prakhar_squared_mayank.moodler;
 
 import android.app.Activity;
-import android.content.Context;
-import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ExpandableListAdapter;
 import android.widget.ExpandableListView;
 
 import com.android.volley.Request;
-import com.android.volley.RequestQueue;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
-import com.android.volley.toolbox.Volley;
 
 import org.json.JSONObject;
 
-import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
-import prakhar_squared_mayank.moodler.R;
+import prakhar_squared_mayank.moodler.Adapters.GradeListViewAdapter;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -45,6 +39,7 @@ public class GradeFragment extends Fragment {
     List<String> listDataHeader;
     HashMap<String, List<String>> listDataChild;
     JSONObject responseObject = null;
+    public String ip=MainActivity.ip;
 
     // TODO: Rename and change types of parameters
     private String mParam1;
@@ -112,7 +107,7 @@ public class GradeFragment extends Fragment {
     }
 
     public void queryGrades() {
-        String loginUrl="http://192.168.43.48:8000/default/grades.json";
+        String loginUrl="http://"+ip+"/default/grades.json";
         System.out.println("URL HIT WAS:"+loginUrl);
         StringRequest req=new StringRequest(Request.Method.GET, loginUrl, new Response.Listener<String>() {
             @Override
@@ -132,8 +127,7 @@ public class GradeFragment extends Fragment {
             public void onErrorResponse(VolleyError error) {
             }
         });
-        RequestQueue a = Volley.newRequestQueue(getActivity(), 4000);
-        a.add(req);
+        volley_singleton.getInstance(getActivity()).getRequestQueue().add(req);
     }
 
     // TODO: Rename method, update argument and hook method into UI event
