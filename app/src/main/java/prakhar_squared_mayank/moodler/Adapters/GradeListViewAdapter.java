@@ -1,4 +1,4 @@
-package prakhar_squared_mayank.moodler;
+package prakhar_squared_mayank.moodler.Adapters;
 
 import android.content.Context;
 import android.graphics.Typeface;
@@ -16,6 +16,8 @@ import org.json.JSONObject;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
+
+import prakhar_squared_mayank.moodler.R;
 
 /**
  * Created by mayank on 18/02/16.

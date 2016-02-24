@@ -12,6 +12,7 @@ import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.LinearLayout;
@@ -40,6 +41,7 @@ public class MainActivity extends ActionBarActivity implements View.OnClickListe
     EditText username,password;
     static String ip="192.168.43.48:8000";
     private TextView resultText;
+    LinearLayout mainLL;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -56,22 +58,38 @@ public class MainActivity extends ActionBarActivity implements View.OnClickListe
         registerButton = (Button)findViewById(R.id.register_main);
         registerButton.setOnClickListener(this);
 
+        mainLL = (LinearLayout) findViewById(R.id.main_linear);
+        mainLL.setOnClickListener(this);
+
         //Username and password edit texts
         username=(EditText) findViewById(R.id.username);
         password=(EditText) findViewById(R.id.password);
     }
 
     public void onClick(View view){
-//        loginProc();
         switch (view.getId()){
             case R.id.loginB:
+                hideKeyboard();
                 loginProc();
                 break;
             case R.id.register_main:
+                hideKeyboard();
                 Intent it = new Intent(this, RegisterActivity.class);
                 startActivity(it);
                 break;
+            case R.id.main_linear:
+                hideKeyboard();
+                break;
             default:
+        }
+    }
+
+    public void hideKeyboard()
+    {
+        View view = this.getCurrentFocus();
+        if (view != null) {
+            InputMethodManager imm = (InputMethodManager)getSystemService(Context.INPUT_METHOD_SERVICE);
+            imm.hideSoftInputFromWindow(view.getWindowToken(), 0);
         }
     }
 

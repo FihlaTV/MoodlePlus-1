@@ -1,4 +1,4 @@
-package prakhar_squared_mayank.moodler;
+package prakhar_squared_mayank.moodler.Adapters;
 
 import android.app.Activity;
 import android.view.LayoutInflater;

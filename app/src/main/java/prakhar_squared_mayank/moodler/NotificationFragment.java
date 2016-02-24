@@ -69,17 +69,17 @@ public class NotificationFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         View v = inflater.inflate(R.layout.fragment_notification, container, false);
-        nameTV = (TextView) v.findViewById(R.id.name_notif);
-        nameTV.setText(Dashboard.fname + " " + Dashboard.lname);
-
-        usernameTV = (TextView) v.findViewById(R.id.username_notif);
-        usernameTV.setText(Dashboard.uname);
-
-        entryTV = (TextView) v.findViewById(R.id.entry_number_notif);
-        entryTV.setText(Dashboard.entrynum);
-
-        emailTV = (TextView) v.findViewById(R.id.email_notif);
-        emailTV.setText(Dashboard.email);
+//        nameTV = (TextView) v.findViewById(R.id.name_notif);
+//        nameTV.setText(Dashboard.fname + " " + Dashboard.lname);
+//
+//        usernameTV = (TextView) v.findViewById(R.id.username_notif);
+//        usernameTV.setText(Dashboard.uname);
+//
+//        entryTV = (TextView) v.findViewById(R.id.entry_number_notif);
+//        entryTV.setText(Dashboard.entrynum);
+//
+//        emailTV = (TextView) v.findViewById(R.id.email_notif);
+//        emailTV.setText(Dashboard.email);
         // Inflate the layout for this fragment
         return v;
     }

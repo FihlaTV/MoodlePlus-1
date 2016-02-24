@@ -1,4 +1,4 @@
-package prakhar_squared_mayank.moodler;
+package prakhar_squared_mayank.moodler.Adapters;
 
 import android.app.Activity;
 import android.view.LayoutInflater;
@@ -10,6 +10,7 @@ import android.widget.TextView;
 import java.util.ArrayList;
 import java.util.List;
 
+import prakhar_squared_mayank.moodler.R;
 import prakhar_squared_mayank.moodler.models.Assignment;
 
 

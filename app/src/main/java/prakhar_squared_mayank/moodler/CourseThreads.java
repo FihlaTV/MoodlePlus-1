@@ -1,15 +1,25 @@
 package prakhar_squared_mayank.moodler;
 
 import android.app.Activity;
+import android.app.ProgressDialog;
+import android.content.DialogInterface;
+import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
+import android.support.design.widget.Snackbar;
 import android.support.v4.app.Fragment;
+import android.support.v7.app.AlertDialog;
+import android.text.InputType;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
+import android.widget.EditText;
+import android.widget.LinearLayout;
 import android.widget.ListView;
+import android.widget.Toast;
 
 import com.android.volley.Request;
 import com.android.volley.RequestQueue;
@@ -21,7 +31,18 @@ import com.android.volley.toolbox.Volley;
 import org.json.JSONArray;
 import org.json.JSONObject;
 
-import prakhar_squared_mayank.moodler.R;
+import com.android.volley.Request;
+import com.android.volley.Response;
+import com.android.volley.VolleyError;
+import com.android.volley.toolbox.StringRequest;
+
+import org.json.JSONArray;
+import org.json.JSONObject;
+
+import java.io.UnsupportedEncodingException;
+import java.net.URLEncoder;
+
+import prakhar_squared_mayank.moodler.Adapters.CourseThreadsAdapter;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -44,6 +65,9 @@ public class CourseThreads extends Fragment implements View.OnClickListener {
     CourseThreadsAdapter listAdapter;
     ListView courseThreadLV;
     FloatingActionButton newThreadFAB;
+    ProgressDialog progressDialog;
+
+    private String ip = MainActivity.ip;
 
     private OnFragmentInteractionListener mListener;
 
@@ -91,7 +115,7 @@ public class CourseThreads extends Fragment implements View.OnClickListener {
                 //todo:b shift to the specific thread from here
             }
         });
-        newThreadFAB = (FloatingActionButton)v.findViewById(R.id.fab);
+        newThreadFAB = (FloatingActionButton)v.findViewById(R.id.fabct);
         newThreadFAB.setOnClickListener(this);
         getThreads();
 
@@ -99,8 +123,8 @@ public class CourseThreads extends Fragment implements View.OnClickListener {
     }
 
     public void getThreads() {
-        String loginUrl="http://192.168.43.48:8000/courses/course.json/cop290/threads"; //todo:b get course name and set ip
-        System.out.println("URL HIT WAS:"+loginUrl);
+        String loginUrl="http://"+ip+"/courses/course.json/"+((CoursePage)getActivity()).getCourseCode()+"/threads";
+        System.out.println("URL HIT WAS:" + loginUrl);
         StringRequest req=new StringRequest(Request.Method.GET, loginUrl, new Response.Listener<String>() {
             @Override
             public void onResponse(String response) {
@@ -119,8 +143,7 @@ public class CourseThreads extends Fragment implements View.OnClickListener {
             public void onErrorResponse(VolleyError error) {
             }
         });
-        RequestQueue a = Volley.newRequestQueue(getActivity(), 4000);
-        a.add(req);
+        volley_singleton.getInstance(getActivity()).getRequestQueue().add(req);
     }
 
     // TODO: Rename method, update argument and hook method into UI event
@@ -145,14 +168,94 @@ public class CourseThreads extends Fragment implements View.OnClickListener {
     public void onClick(View view) {
         switch(view.getId())
         {
-            case R.id.fab:
+            case R.id.fabct:
                 showNewThreadOptions();
                 break;
         }
     }
 
     public void showNewThreadOptions() {
+        Log.d("Course Thread", "New Thread");
+        AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
+        builder.setTitle("Add Thread");
 
+        final LinearLayout ll = new LinearLayout(getActivity());
+        ll.setOrientation(LinearLayout.VERTICAL);
+        ll.setPadding(15, 5, 15, 5);
+        final EditText input = new EditText(getActivity());
+        input.setInputType(InputType.TYPE_CLASS_TEXT);
+        input.setHint("Thread title");
+        final EditText input2 = new EditText(getActivity());
+        input2.setInputType(InputType.TYPE_CLASS_TEXT);
+        input2.setHint("Thread Description");
+
+
+        ll.addView(input);
+        ll.addView(input2);
+        builder.setView(ll);
+
+// Set up the buttons
+        builder.setPositiveButton("CREATE", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                String title="", titleEncoded="", desc="", descEncoded="";
+                try {
+                    title = input.getText().toString();
+                    titleEncoded = URLEncoder.encode(title, "utf-8");
+                    desc = input2.getText().toString();
+                    descEncoded = URLEncoder.encode(desc, "utf-8");
+                } catch (UnsupportedEncodingException e) {
+                    Toast.makeText(getActivity(), "Unsupported input", Toast.LENGTH_SHORT).show();
+                    return;
+                }
+                showProgressDialog();
+                String loginUrl = "http://" + ip + "/threads/new.json?title="+titleEncoded+"&description="+descEncoded+"&course_code=" + ((CoursePage) getActivity()).getCourseCode();
+                System.out.println("URL HIT WAS NEW THREAD:" + loginUrl);
+                StringRequest req = new StringRequest(Request.Method.GET, loginUrl, new Response.Listener<String>() {
+                    @Override
+                    public void onResponse(String Response) {
+                        progressDialog.dismiss();
+                        try {
+                            JSONObject res = new JSONObject(Response);
+
+                            String success = res.getString("success");
+                            if (success.equals("false")) {
+                                Toast.makeText(getActivity(), "Failed to create thread.", Toast.LENGTH_SHORT).show();
+                            } else {
+                                Toast.makeText(getActivity(), "Thread created.", Toast.LENGTH_SHORT).show();
+                                getThreads();
+                            }
+                        } catch (Exception e) {
+                            e.printStackTrace();
+                        }
+
+
+                    }
+                }, new Response.ErrorListener() {
+                    @Override
+                    public void onErrorResponse(VolleyError error) {
+                        progressDialog.dismiss();
+                        Toast.makeText(getActivity(), "Server Error.", Toast.LENGTH_SHORT).show();
+                    }
+                });
+                volley_singleton.getInstance(getActivity()).getRequestQueue().add(req);
+            }
+        });
+        builder.setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                dialog.cancel();
+            }
+        });
+
+        builder.show();
+    }
+
+    public void showProgressDialog() {
+        progressDialog = new ProgressDialog(getActivity(), R.style.Base_Theme_AppCompat_Dialog);
+        progressDialog.setIndeterminate(true);
+        progressDialog.setTitle("Creating thread...");
+        progressDialog.show();
     }
 
     /**

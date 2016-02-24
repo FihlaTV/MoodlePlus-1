@@ -1,14 +1,10 @@
 package prakhar_squared_mayank.moodler;
 
 import android.app.Activity;
-import android.app.DownloadManager;
-import android.content.Context;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
-import android.support.v4.app.ListFragment;
-import android.support.v7.internal.widget.AdapterViewCompat;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -27,7 +23,7 @@ import org.json.JSONObject;
 
 import java.util.ArrayList;
 
-import prakhar_squared_mayank.moodler.R;
+import prakhar_squared_mayank.moodler.Adapters.CoursesAdapter;
 import prakhar_squared_mayank.moodler.models.Course;
 
 /**
