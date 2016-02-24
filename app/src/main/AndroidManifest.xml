@@ -37,6 +37,10 @@
             android:label="@string/title_activity_course_page"
             android:theme="@style/AppTheme.NoActionBar" >
         </activity>
+        <activity
+            android:name="AssignmentDetails"
+            android:label="@string/title_activity_assignment_details" >
+        </activity>
     </application>
 
 </manifest>

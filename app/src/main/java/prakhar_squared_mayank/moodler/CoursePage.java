@@ -21,6 +21,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import prakhar_squared_mayank.moodler.R;
+import prakhar_squared_mayank.moodler.models.Course;
 
 public class CoursePage extends AppCompatActivity {
 
@@ -37,15 +38,22 @@ public class CoursePage extends AppCompatActivity {
     /**
      * The {@link ViewPager} that will host the section contents.
      */
+
+    public String courseCode;
+
     private Toolbar toolbar;
     private TabLayout tabLayout;
     private ViewPager mViewPager;
+
+    public String getCourseCode(){
+        return courseCode;
+    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_course_page);
-
+        courseCode=(String) getIntent().getStringExtra("courseCode");
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar_course);
         setSupportActionBar(toolbar);
 

@@ -6,6 +6,7 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
+import android.text.InputType;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -35,7 +36,7 @@ public class MainActivity extends ActionBarActivity implements View.OnClickListe
     final Context context = this;
     Button loginButton;
     EditText username,password;
-    static String ip="10.0.2.2:8000";
+    static String ip="192.168.43.48:8000";
     private TextView resultText;
 
     @Override
@@ -59,7 +60,7 @@ public class MainActivity extends ActionBarActivity implements View.OnClickListe
 //        loginProc();
         switch (view.getId()){
             case R.id.loginB:
-                goToCoursePage();
+                loginProc();
                 break;
             default:
         }
@@ -77,16 +78,13 @@ public class MainActivity extends ActionBarActivity implements View.OnClickListe
     public void loginProc(){
         String usernameString=username.getText().toString().trim();
         String passwordString=password.getText().toString().trim();
-//    String loginUrl="http://www.google.com";
+
         String loginUrl="http://"+ip+"/default/login.json?userid="+usernameString+"&password="+passwordString;
         System.out.println("URL HIT WAS:"+loginUrl);
         StringRequest req=new StringRequest(Request.Method.GET, loginUrl, new Response.Listener<String>() {
             @Override
             public void onResponse(String Response) {
                 try {
-//                    JSONObject res=new JSONObject(Response);
-
-//                    String success=res.getString("success");
                     System.out.println("YOU ARE HERE EUREKA!");
                     showToast("success");
                     Intent it = new Intent(getApplicationContext(), Dashboard.class);
@@ -118,6 +116,7 @@ public class MainActivity extends ActionBarActivity implements View.OnClickListe
     }
 
     public void changeIp(){
+
         LayoutInflater layoutInflater = LayoutInflater.from(MainActivity.this);
         View promptView = layoutInflater.inflate(R.layout.input_dialog, null);
         AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(MainActivity.this);
@@ -128,7 +127,7 @@ public class MainActivity extends ActionBarActivity implements View.OnClickListe
         alertDialogBuilder.setCancelable(false)
                 .setPositiveButton("OK", new DialogInterface.OnClickListener() {
                     public void onClick(DialogInterface dialog, int id) {
-                        resultText.setText("Hello, " + editText.getText());
+                        ip=(String) editText.getText().toString().trim();
                     }
                 })
                 .setNegativeButton("Cancel",
@@ -141,7 +140,6 @@ public class MainActivity extends ActionBarActivity implements View.OnClickListe
         // create an alert dialog
         AlertDialog alert = alertDialogBuilder.create();
         alert.show();
-
     }
 
     @Override
