@@ -2,7 +2,8 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="prakhar_squared_mayank.moodler.GradeFragment">
+    tools:context="prakhar_squared_mayank.moodler.GradeFragment"
+    android:background="#4379d6">
 
     <!-- TODO: Update blank fragment layout -->
     <ExpandableListView
