@@ -64,6 +64,6 @@ public class Assignment implements Serializable{
     }
 
     public void setDescription(String description) {
-        description = description;
+        this.description = description;
     }
 }

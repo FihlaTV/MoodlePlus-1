@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    android:padding="10dp">
+
+    <TextView
+        android:id="@+id/comment_tdr"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textColor="#ffffff"
+        android:text="A user comment"
+        android:textSize="18dp"/>
+
+    <RelativeLayout
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content">
+        <TextView
+            android:id="@+id/username_tdr"
+            android:textColor="#ffffff"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Username"/>
+
+        <TextView
+            android:id="@+id/ago_tdr"
+            android:layout_width="wrap_content"
+            android:textColor="#ffffff"
+            android:layout_height="wrap_content"
+            android:layout_alignBottom="@+id/username_tdr"
+            android:layout_alignParentRight="true"
+            android:text="8 hours, 33 minutes ago."/>
+    </RelativeLayout>
+
+</LinearLayout>

@@ -6,12 +6,21 @@
     <TextView android:id="@+id/ThreadTitle"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:layout_marginLeft="5dp"
+        android:textSize="20dp"
+        android:textStyle="bold"
+        android:textColor="#ffffff"
         android:text="Title"/>
 
 
     <TextView android:id="@+id/ThreadDescription"
         android:layout_width="fill_parent"
+        android:layout_marginTop="5dp"
+        android:layout_marginLeft="5dp"
+        android:textSize="17dp"
         android:layout_height="wrap_content"
+        android:textColor="#ffffff"
         android:text="Thread Description"/>
 
 

@@ -99,7 +99,7 @@ public class Dashboard extends AppCompatActivity {
     public void setUpViewPager(ViewPager upViewPager) {
 
         SectionsPagerAdapter adapter = new SectionsPagerAdapter(getSupportFragmentManager());
-        adapter.addFragment(new NotificationFragment(), "Personal");
+        adapter.addFragment(new NotificationFragment(), "Notifs");
         adapter.addFragment(new CourseFragment(), "Courses");
         adapter.addFragment(new GradeFragment(), "Grades");
         mViewPager.setAdapter(adapter);

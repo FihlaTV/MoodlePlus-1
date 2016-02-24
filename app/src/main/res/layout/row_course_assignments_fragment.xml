@@ -7,6 +7,7 @@
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
         android:text="Assignment Title"
+        android:textColor="#ffffff"
         android:textSize="20dp"
         android:textStyle="bold"/>
 
@@ -15,6 +16,7 @@
     <TextView android:id="@+id/StartDate"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:textColor="#ffffff"
         android:text="Start Date"
         android:textSize="18dp"/>
 
@@ -22,12 +24,14 @@
 
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:textColor="#ffffff"
         android:text="End Date"
         android:textSize="18dp"/>
 
 
     <TextView android:id="@+id/CourseAssignmentDescription"
         android:layout_width="fill_parent"
+        android:textColor="#ffffff"
         android:layout_height="wrap_content"
         android:text="This is assignment description"
         android:textSize="15dp"/>

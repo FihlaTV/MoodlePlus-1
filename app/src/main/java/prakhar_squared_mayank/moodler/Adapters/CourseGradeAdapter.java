@@ -25,7 +25,7 @@ public class CourseGradeAdapter extends ArrayAdapter<Grade> {
         //String[] item=new String[10];
 
         public CourseGradeAdapter(Activity activity, List<Grade> items){
-            super(activity, R.layout.row_course_grades);
+            super(activity, R.layout.row_course_grades, items);
             inflater=activity.getWindow().getLayoutInflater();
             grades=items;
 //        for(int i=0;i<items.size();i++){

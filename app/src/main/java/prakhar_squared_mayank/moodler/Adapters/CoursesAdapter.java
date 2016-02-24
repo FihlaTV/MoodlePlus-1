@@ -50,9 +50,9 @@ public class CoursesAdapter extends ArrayAdapter<Course> {
         TextView Description=(TextView) convertView.findViewById(R.id.courseDescription);
         TextView footer=(TextView) convertView.findViewById(R.id.footer);
         Course tmp=courseshere.get(position);
-        title.setText(tmp.getCode()+"::"+tmp.getName());
-        Description.setText("Description::"+tmp.getDescription());
-        footer.setText("id:"+tmp.getId()+"  credits:"+tmp.getCredits()+"  l_t_p:"+tmp.getLtp());
+        title.setText(tmp.getName() + " (" + tmp.getCode().toUpperCase() + ")");
+        Description.setText("Description:: "+tmp.getDescription());
+        footer.setText("id: "+tmp.getId()+"  credits: "+tmp.getCredits()+"  l_t_p: "+tmp.getLtp());
 
         return convertView;//inflater.inflate(R.layout.row_tweet,parent,false);
     }

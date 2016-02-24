@@ -24,13 +24,13 @@ public class AssignmentDetails extends ActionBarActivity {
         //int assignId=intent.getIntExtra("assignmentId");
 
         TextView courTitle=(TextView) findViewById(R.id.CourseCode);
-       courTitle.setText(assign.getCourseCode());
+       courTitle.setText(assign.getCourseCode().toUpperCase());
         TextView assignTitle=(TextView) findViewById(R.id.AssignTitle);
         assignTitle.setText(assign.getName());
         TextView StartDate=(TextView) findViewById(R.id.StartDate);
-        StartDate.setText(assign.getStartDate());
+        StartDate.setText("Created On: " + assign.getStartDate());
         TextView EndDate=(TextView) findViewById(R.id.EndDate);
-        EndDate.setText(assign.getEndDate());
+        EndDate.setText("Deadline: " + assign.getEndDate());
         TextView Description=(TextView) findViewById(R.id.CourseAssignmentDescription);
         Description.setText(assign.getDescription());
     }

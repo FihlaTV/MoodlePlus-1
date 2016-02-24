@@ -29,6 +29,7 @@ import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
 
 import org.json.JSONArray;
+import org.json.JSONException;
 import org.json.JSONObject;
 
 import com.android.volley.Request;
@@ -111,8 +112,17 @@ public class CourseThreads extends Fragment implements View.OnClickListener {
         courseThreadLV.setAdapter(listAdapter);
         courseThreadLV.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
-            public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
-                //todo:b shift to the specific thread from here
+            public void onItemClick(AdapterView<?> adapterView, View view, int position, long l) {
+                Intent it = new Intent(getActivity(), ThreadDetailActivity.class);
+                try {
+                    it.putExtra("ThreadDetailID", responseArray.getJSONObject(position).getString("id"));
+                    it.putExtra("ThreadDetailTitle", responseArray.getJSONObject(position).getString("title"));
+                    it.putExtra("ThreadDetailDesc", responseArray.getJSONObject(position).getString("description"));
+                }
+                catch(JSONException e) {
+
+                }
+                startActivity(it);
             }
         });
         newThreadFAB = (FloatingActionButton)v.findViewById(R.id.fabct);
