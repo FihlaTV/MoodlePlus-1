@@ -101,6 +101,11 @@ public class MainActivity extends ActionBarActivity implements View.OnClickListe
                     else {
                         Toast.makeText(getApplicationContext(), "Welcome "+res.getJSONObject("user").getString("first_name")+"!", Toast.LENGTH_SHORT).show();
                         Intent it = new Intent(getApplicationContext(), Dashboard.class);
+                        it.putExtra("Extra.firstname", res.getJSONObject("user").getString("first_name"));
+                        it.putExtra("Extra.lastname", res.getJSONObject("user").getString("last_name"));
+                        it.putExtra("Extra.entry", res.getJSONObject("user").getString("entry_no"));
+                        it.putExtra("Extra.email", res.getJSONObject("user").getString("email"));
+                        it.putExtra("Extra.username", res.getJSONObject("user").getString("username"));
                         startActivity(it);
                     }
                 }catch (Exception e){

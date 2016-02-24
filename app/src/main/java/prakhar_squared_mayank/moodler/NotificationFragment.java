@@ -8,6 +8,7 @@ import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.TextView;
 
 import prakhar_squared_mayank.moodler.R;
 
@@ -24,6 +25,8 @@ public class NotificationFragment extends Fragment {
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
     private static final String ARG_PARAM1 = "param1";
     private static final String ARG_PARAM2 = "param2";
+
+    TextView nameTV, usernameTV, emailTV, entryTV;
 
     // TODO: Rename and change types of parameters
     private String mParam1;
@@ -65,8 +68,20 @@ public class NotificationFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
+        View v = inflater.inflate(R.layout.fragment_notification, container, false);
+        nameTV = (TextView) v.findViewById(R.id.name_notif);
+        nameTV.setText(Dashboard.fname + " " + Dashboard.lname);
+
+        usernameTV = (TextView) v.findViewById(R.id.username_notif);
+        usernameTV.setText(Dashboard.uname);
+
+        entryTV = (TextView) v.findViewById(R.id.entry_number_notif);
+        entryTV.setText(Dashboard.entrynum);
+
+        emailTV = (TextView) v.findViewById(R.id.email_notif);
+        emailTV.setText(Dashboard.email);
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_notification, container, false);
+        return v;
     }
 
     // TODO: Rename method, update argument and hook method into UI event
