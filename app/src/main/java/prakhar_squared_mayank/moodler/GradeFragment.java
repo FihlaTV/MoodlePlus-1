@@ -1,12 +1,29 @@
 package prakhar_squared_mayank.moodler;
 
 import android.app.Activity;
+import android.content.Context;
+import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ExpandableListAdapter;
+import android.widget.ExpandableListView;
+
+import com.android.volley.Request;
+import com.android.volley.RequestQueue;
+import com.android.volley.Response;
+import com.android.volley.VolleyError;
+import com.android.volley.toolbox.StringRequest;
+import com.android.volley.toolbox.Volley;
+
+import org.json.JSONObject;
+
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
 
 import prakhar_squared_mayank.moodler.R;
 
@@ -23,6 +40,11 @@ public class GradeFragment extends Fragment {
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
     private static final String ARG_PARAM1 = "param1";
     private static final String ARG_PARAM2 = "param2";
+    ExpandableListView gradeListView;
+    GradeListViewAdapter listAdapter;
+    List<String> listDataHeader;
+    HashMap<String, List<String>> listDataChild;
+    JSONObject responseObject = null;
 
     // TODO: Rename and change types of parameters
     private String mParam1;
@@ -65,7 +87,53 @@ public class GradeFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_grade, container, false);
+        View v = inflater.inflate(R.layout.fragment_grade, container, false);
+        gradeListView = (ExpandableListView) v.findViewById(R.id.grade_expandable_lv);
+
+        gradeListView.setOnGroupExpandListener(new ExpandableListView.OnGroupExpandListener() {
+            int previousGroup = -1;
+
+            @Override
+            public void onGroupExpand(int groupPosition) {
+                if(groupPosition != previousGroup)
+                    gradeListView.collapseGroup(previousGroup);
+                previousGroup = groupPosition;
+            }
+        });
+
+        // preparing list data
+        queryGrades();
+
+        listAdapter = new GradeListViewAdapter(getActivity(), responseObject);
+
+        // setting list adapter
+        gradeListView.setAdapter(listAdapter);
+        return v;
+    }
+
+    public void queryGrades() {
+        String loginUrl="http://192.168.43.48:8000/default/grades.json";
+        System.out.println("URL HIT WAS:"+loginUrl);
+        StringRequest req=new StringRequest(Request.Method.GET, loginUrl, new Response.Listener<String>() {
+            @Override
+            public void onResponse(String response) {
+                try {
+                    responseObject=new JSONObject(response);
+                    listAdapter.updateData(responseObject);
+
+                }catch (Exception e){
+                    e.printStackTrace();
+                }
+
+
+            }
+        }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+            }
+        });
+        RequestQueue a = Volley.newRequestQueue(getActivity(), 4000);
+        a.add(req);
     }
 
     // TODO: Rename method, update argument and hook method into UI event

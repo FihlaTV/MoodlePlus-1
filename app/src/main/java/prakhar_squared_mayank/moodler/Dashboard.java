@@ -41,6 +41,8 @@ public class Dashboard extends AppCompatActivity {
     private TabLayout tabLayout;
     private ViewPager mViewPager;
 
+    public static String fname="", lname="", email="", uname="", entrynum="";
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -51,6 +53,12 @@ public class Dashboard extends AppCompatActivity {
         // Create the adapter that will return a fragment for each of the three
         // primary sections of the activity.
         mSectionsPagerAdapter = new SectionsPagerAdapter(getSupportFragmentManager());
+
+        fname = getIntent().getStringExtra("Extra.firstname");
+        lname = getIntent().getStringExtra("Extra.lastname");
+        email = getIntent().getStringExtra("Extra.email");
+        uname = getIntent().getStringExtra("Extra.username");
+        entrynum = getIntent().getStringExtra("Extra.entry");
 
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
@@ -80,7 +88,8 @@ public class Dashboard extends AppCompatActivity {
         int id = item.getItemId();
 
         //noinspection SimplifiableIfStatement
-        if (id == R.id.action_settings) {
+        if (id == R.id.logout_dashboard) {
+            Utility.logoutUser(this);
             return true;
         }
 
@@ -90,7 +99,7 @@ public class Dashboard extends AppCompatActivity {
     public void setUpViewPager(ViewPager upViewPager) {
 
         SectionsPagerAdapter adapter = new SectionsPagerAdapter(getSupportFragmentManager());
-        adapter.addFragment(new NotificationFragment(), "Notices");
+        adapter.addFragment(new NotificationFragment(), "Personal");
         adapter.addFragment(new CourseFragment(), "Courses");
         adapter.addFragment(new GradeFragment(), "Grades");
         mViewPager.setAdapter(adapter);

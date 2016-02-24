@@ -34,7 +34,7 @@ import java.util.Map;
 public class MainActivity extends ActionBarActivity implements View.OnClickListener {
 
     final Context context = this;
-    Button loginButton;
+    Button loginButton, registerButton;
     EditText username,password;
     static String ip="192.168.43.48:8000";
     private TextView resultText;
@@ -51,7 +51,10 @@ public class MainActivity extends ActionBarActivity implements View.OnClickListe
         loginButton=(Button) findViewById(R.id.loginB);
         loginButton.setOnClickListener(this);
 
-        //Uername and password edit texts
+        registerButton = (Button)findViewById(R.id.register_main);
+        registerButton.setOnClickListener(this);
+
+        //Username and password edit texts
         username=(EditText) findViewById(R.id.username);
         password=(EditText) findViewById(R.id.password);
     }
@@ -61,6 +64,10 @@ public class MainActivity extends ActionBarActivity implements View.OnClickListe
         switch (view.getId()){
             case R.id.loginB:
                 loginProc();
+                break;
+            case R.id.register_main:
+                Intent it = new Intent(this, RegisterActivity.class);
+                startActivity(it);
                 break;
             default:
         }
@@ -85,10 +92,23 @@ public class MainActivity extends ActionBarActivity implements View.OnClickListe
             @Override
             public void onResponse(String Response) {
                 try {
-                    System.out.println("YOU ARE HERE EUREKA!");
-                    showToast("success");
-                    Intent it = new Intent(getApplicationContext(), Dashboard.class);
-                    startActivity(it);
+                    JSONObject res=new JSONObject(Response);
+
+                    String success=res.getString("success");
+                    if(success.equals("false"))
+                    {
+                        Toast.makeText(getApplicationContext(), "Login Failed", Toast.LENGTH_SHORT).show();
+                    }
+                    else {
+                        Toast.makeText(getApplicationContext(), "Welcome "+res.getJSONObject("user").getString("first_name")+"!", Toast.LENGTH_SHORT).show();
+                        Intent it = new Intent(getApplicationContext(), Dashboard.class);
+                        it.putExtra("Extra.firstname", res.getJSONObject("user").getString("first_name"));
+                        it.putExtra("Extra.lastname", res.getJSONObject("user").getString("last_name"));
+                        it.putExtra("Extra.entry", res.getJSONObject("user").getString("entry_no"));
+                        it.putExtra("Extra.email", res.getJSONObject("user").getString("email"));
+                        it.putExtra("Extra.username", res.getJSONObject("user").getString("username"));
+                        startActivity(it);
+                    }
                 }catch (Exception e){
                     e.printStackTrace();
                 }
@@ -127,6 +147,7 @@ public class MainActivity extends ActionBarActivity implements View.OnClickListe
         alertDialogBuilder.setCancelable(false)
                 .setPositiveButton("OK", new DialogInterface.OnClickListener() {
                     public void onClick(DialogInterface dialog, int id) {
+
                         ip=(String) editText.getText().toString().trim();
                     }
                 })

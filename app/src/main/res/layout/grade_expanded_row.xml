@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="70dp"
+    android:background="#99f1bd">
+
+    <TextView
+        android:id="@+id/assignment_name_tv"
+        android:textSize="15dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Assignment1: "
+        android:layout_centerVertical="true"/>
+
+    <TextView
+        android:id="@+id/score_tv"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="15.0/30.5"
+        android:textSize="15dp"
+        android:paddingLeft="10dp"
+        android:layout_centerVertical="true"
+        android:layout_toRightOf="@id/assignment_name_tv"/>
+
+</RelativeLayout>

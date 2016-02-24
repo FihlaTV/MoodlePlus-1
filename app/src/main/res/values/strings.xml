@@ -1,7 +1,7 @@
 <resources>
     <string name="app_name">Moodler</string>
-    <string name="username">Enter your Username</string>
-    <string name="password">Enter your Password</string>
+    <string name="username">Login Id</string>
+    <string name="password">Password</string>
     <string name="change_ip">Change IP</string>
     <string name="login">Login</string>
     <string name="hello_world">Hello world!</string>
@@ -19,5 +19,13 @@
     <string name="title_section1">Section 1</string>
     <string name="title_section2">Section 2</string>
     <string name="title_section3">Section 3</string>
+
     <string name="title_activity_assignment_details">AssignmentDetails</string>
+
+
+    <string-array name="type_array">
+        <item>Student</item>
+        <item>Professor</item>
+    </string-array>
+
 </resources>
