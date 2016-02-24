@@ -1,7 +1,8 @@
 <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools" android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="prakhar_squared_mayank.moodler.CourseAssignment">
+    tools:context="prakhar_squared_mayank.moodler.CourseAssignment"
+    android:background="#4379d6">
 
     <!-- TODO: Update blank fragment layout -->
 
@@ -9,6 +10,7 @@
     <ListView xmlns:android="http://schemas.android.com/apk/res/android"
         android:id="@+id/listview1"
         android:layout_width="fill_parent"
-        android:layout_height="fill_parent" />
+        android:layout_height="fill_parent"
+        />
 
 </FrameLayout>

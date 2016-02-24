@@ -6,24 +6,29 @@
     <TextView android:id="@+id/AssignTitle"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
-        android:text="Assignment Title"/>
+        android:text="Assignment Title"
+        android:textSize="20dp"
+        android:textStyle="bold"/>
 
 
 
     <TextView android:id="@+id/StartDate"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Start Date"/>
+        android:text="Start Date"
+        android:textSize="18dp"/>
 
     <TextView android:id="@+id/EndDate"
 
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="End Date"/>
+        android:text="End Date"
+        android:textSize="18dp"/>
 
 
     <TextView android:id="@+id/CourseAssignmentDescription"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
-        android:text="This is assignment description" />
+        android:text="This is assignment description"
+        android:textSize="15dp"/>
 </LinearLayout>

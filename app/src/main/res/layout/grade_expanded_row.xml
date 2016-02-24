@@ -6,9 +6,10 @@
 
     <TextView
         android:id="@+id/assignment_name_tv"
-        android:textSize="15dp"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:textSize="20dp"
+        android:textStyle="bold"
         android:text="Assignment1: "
         android:layout_centerVertical="true"/>
 
@@ -17,7 +18,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="15.0/30.5"
-        android:textSize="15dp"
+        android:textSize="16dp"
         android:paddingLeft="10dp"
         android:layout_centerVertical="true"
         android:layout_toRightOf="@id/assignment_name_tv"/>

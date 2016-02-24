@@ -6,7 +6,8 @@
 
     <TextView
         android:id="@+id/course_code_tv"
-        android:textSize="25dp"
+        android:textSize="20dp"
+        android:textStyle="bold"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="COL260 code"
