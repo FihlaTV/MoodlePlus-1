@@ -4,8 +4,11 @@
     tools:context="prakhar_squared_mayank.moodler.CourseThreads">
 
     <!-- TODO: Update blank fragment layout -->
-    <TextView android:layout_width="match_parent" android:layout_height="match_parent"
-        android:text="@string/hello_blank_fragment" />
+
+    <ListView
+        android:id="@+id/course_thread_lv"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent" />
 
     <android.support.design.widget.FloatingActionButton
     android:id="@+id/fab"
@@ -14,6 +17,6 @@
     android:layout_margin="16dp"
     android:clickable="true"
     android:src="@mipmap/ic_launcher"
-    android:layout_gravity="bottom"/>
+    android:layout_gravity="bottom|right"/>
 
 </FrameLayout>
